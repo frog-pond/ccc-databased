@@ -13,9 +13,10 @@ create table dictionary
     sort_group  text not null generated always as ( left(upper(sort_title), 1) ) stored
 );
 
-alter table dictionary enable row level security;
+alter table dictionary
+    enable row level security;
 
 create policy "dictionary is viewable by everyone"
-on dictionary for select
-to authenticated, anon
-using ( true );
+    on dictionary for select
+    to authenticated, anon
+    using (true);

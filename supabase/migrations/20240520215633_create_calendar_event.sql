@@ -15,9 +15,45 @@ create table calendar_event
     constraint only_one_location check ( case when campus_location_id is not null then textual_location is null end )
 );
 
-alter table calendar_event enable row level security;
+alter table calendar_event
+    enable row level security;
 
 create policy "calendar_event is viewable by everyone"
-on calendar_event for select
-to authenticated, anon
-using ( true );
+    on calendar_event for select
+    to authenticated, anon
+    using (true);
+
+create table calendar_event_category
+(
+    calendar_event_id uuid not null references calendar_event (id) on update cascade on delete cascade,
+    category_id       uuid not null references content_category (id) on update cascade on delete cascade,
+    source            text not null references data_source (id) on update cascade on delete cascade,
+    primary key (calendar_event_id, category_id)
+);
+
+alter table calendar_event_category
+    enable row level security;
+
+create policy "calendar_event_category is viewable by everyone"
+    on calendar_event_category for select
+    to authenticated, anon
+    using (true);
+
+create table calendar_event_link
+(
+    calendar_event_id uuid not null references calendar_event (id) on update cascade on delete cascade,
+    source            text not null references data_source (id) on update cascade on delete cascade,
+    href              text not null,
+    title             text not null,
+    content_type      text,
+    link_mode         text not null check (link_mode in ('a', 'stream')),
+    primary key (calendar_event_id, href)
+);
+
+alter table calendar_event_link
+    enable row level security;
+
+create policy "calendar_event_link is viewable by everyone"
+    on calendar_event_link for select
+    to authenticated, anon
+    using (true);

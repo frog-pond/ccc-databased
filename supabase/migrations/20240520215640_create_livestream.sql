@@ -14,9 +14,10 @@ create table livestream
     website         text null
 );
 
-alter table livestream enable row level security;
+alter table livestream
+    enable row level security;
 
 create policy "livestream is viewable by everyone"
-on livestream for select
-to authenticated, anon
-using ( true );
+    on livestream for select
+    to authenticated, anon
+    using (true);

@@ -6,9 +6,10 @@ create table metadata
     primary key (key, value)
 );
 
-alter table metadata enable row level security;
+alter table metadata
+    enable row level security;
 
 create policy "metadata is viewable by everyone"
-on metadata for select
-to authenticated, anon
-using ( true );
+    on metadata for select
+    to authenticated, anon
+    using (true);

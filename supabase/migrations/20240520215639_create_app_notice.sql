@@ -13,9 +13,10 @@ create table app_notice
     platform     text        null
 );
 
-alter table app_notice enable row level security;
+alter table app_notice
+    enable row level security;
 
 create policy "app_notice is viewable by everyone"
-on app_notice for select
-to authenticated, anon
-using ( true );
+    on app_notice for select
+    to authenticated, anon
+    using (true);

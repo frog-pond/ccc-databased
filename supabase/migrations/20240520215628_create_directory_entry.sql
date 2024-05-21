@@ -17,9 +17,68 @@ create table directory_entry
     specialties  text
 );
 
-alter table directory_entry enable row level security;
+alter table directory_entry
+    enable row level security;
 
 create policy "directory_entry is viewable by everyone"
-on directory_entry for select
-to authenticated, anon
-using ( true );
+    on directory_entry for select
+    to authenticated, anon
+    using (true);
+
+-- TODO: what is this for, again?
+create table directory_entry_category
+(
+    directory_entry uuid references directory_entry (id) on update cascade on delete cascade,
+    category        text not null check (length(trim(category)) > 0)
+);
+
+alter table directory_entry_category
+    enable row level security;
+
+create policy "directory_entry_category is viewable by everyone"
+    on directory_entry_category for select
+    to authenticated, anon
+    using (true);
+
+create table directory_entry_location
+(
+    directory_entry uuid not null references directory_entry (id) on update cascade on delete cascade,
+    location        uuid not null references location (id) on update cascade on delete cascade,
+    source          text not null references data_source (id) on update cascade on delete cascade,
+    title           text,
+    email           text,
+    phone           text,
+    fax             text,
+    hours           text, -- can we use a schedule record for this? probably not...
+    description     text
+);
+
+alter table directory_entry_location
+    enable row level security;
+
+create policy "directory_entry_location is viewable by everyone"
+    on directory_entry_location for select
+    to authenticated, anon
+    using (true);
+
+create table directory_entry_organization
+(
+    directory_entry        uuid not null references directory_entry (id) on update cascade on delete cascade,
+    directory_organization uuid not null references directory_entry (id) on update cascade on delete cascade,
+    source                 text not null references data_source (id) on update cascade on delete cascade,
+    role                   text, -- not sure if needed, or if can be replaced with title
+    title                  text,
+    email                  text,
+    phone                  text,
+    fax                    text,
+    hours                  text, -- can we use a schedule record for this? probably not...
+    description            text
+);
+
+alter table directory_entry_organization
+    enable row level security;
+
+create policy "directory_entry_organization is viewable by everyone"
+    on directory_entry_organization for select
+    to authenticated, anon
+    using (true);

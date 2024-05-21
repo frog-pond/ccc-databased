@@ -1,4 +1,3 @@
-
 create table student_work
 (
     id                uuid        not null default uuid_generate_v4() primary key,
@@ -20,9 +19,10 @@ create table student_work
                                                 when department_name is null then department_id is not null end)
 );
 
-alter table student_work enable row level security;
+alter table student_work
+    enable row level security;
 
 create policy "student_work is viewable by everyone"
-on student_work for select
-to authenticated, anon
-using ( true );
+    on student_work for select
+    to authenticated, anon
+    using (true);
