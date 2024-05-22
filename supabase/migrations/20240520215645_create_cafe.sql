@@ -1,6 +1,6 @@
 create table cafe
 (
-    id          uuid not null default uuid_generate_v4() primary key,
+    id          uuid not null default gen_random_uuid() primary key,
     source      text not null references data_source (id) on update cascade on delete cascade,
     name        text not null,
     description text,
@@ -35,7 +35,7 @@ create policy "Enable read access for all users"
 
 create table cafe_item
 (
-    id          uuid  not null default uuid_generate_v4() primary key,
+    id          uuid  not null default gen_random_uuid() primary key,
     source      text  not null references data_source (id) on update cascade on delete cascade,
     title       text  not null,
     description text,
@@ -87,7 +87,7 @@ create policy "Enable read access for all users"
 
 create table cafe_station_menu
 (
-    id                 uuid    not null default uuid_generate_v4() primary key,
+    id                 uuid    not null default gen_random_uuid() primary key,
     source             text    not null references data_source (id) on update cascade on delete cascade,
     station_title      text    not null,
     station_note       text    null,

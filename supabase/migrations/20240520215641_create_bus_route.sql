@@ -1,6 +1,6 @@
 create table bus_route
 (
-    id     uuid not null default uuid_generate_v4() primary key,
+    id     uuid not null default gen_random_uuid() primary key,
     source text not null references data_source (id) on update cascade on delete cascade,
     key    text not null,
     title  text not null
@@ -17,7 +17,7 @@ create policy "Enable read access for all users"
 
 create table bus_route_stop
 (
-    id          uuid  not null default uuid_generate_v4() primary key,
+    id          uuid  not null default gen_random_uuid() primary key,
     source      text  not null references data_source (id) on update cascade on delete cascade,
     name        text  not null,
     coordinates jsonb not null default '[]'::jsonb
@@ -34,7 +34,7 @@ create policy "Enable read access for all users"
 
 create table bus_route_timetable
 (
-    id            uuid not null default uuid_generate_v4() primary key,
+    id            uuid not null default gen_random_uuid() primary key,
     source        text not null references data_source (id) on update cascade on delete cascade,
     inbound_stop  uuid null references bus_route_stop (id),
     inbound_time  time null,

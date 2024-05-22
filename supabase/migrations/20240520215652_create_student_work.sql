@@ -1,6 +1,6 @@
 create table student_work
 (
-    id                uuid        not null default uuid_generate_v4() primary key,
+    id                uuid        not null default gen_random_uuid() primary key,
     source            text        not null references data_source (id) on update cascade on delete cascade,
     position_title    text        not null,
     posted_at         timestamptz not null,

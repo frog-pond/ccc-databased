@@ -1,6 +1,6 @@
 create table calendar_event
 (
-    id                     uuid        not null default uuid_generate_v4() primary key,
+    id                     uuid        not null default gen_random_uuid() primary key,
     source                 text        not null references data_source (id) on update cascade on delete cascade,
     recurrence_of_event_id uuid        null references calendar_event (id) on update cascade on delete cascade,
     start_time             timestamptz not null,

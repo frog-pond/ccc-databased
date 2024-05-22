@@ -1,6 +1,6 @@
 create table location_schedule
 (
-    id                uuid        not null default uuid_generate_v4() primary key,
+    id                uuid        not null default gen_random_uuid() primary key,
     source            text        not null references data_source (id) on update cascade on delete cascade,
     parent_schedule   uuid        null references location_schedule (id) on update cascade on delete cascade,
     location_category uuid        null references location_category (id),
@@ -27,7 +27,7 @@ create policy "Enable read access for all users"
 
 create table location_schedule_timetable
 (
-    id                   uuid            not null default uuid_generate_v4() primary key,
+    id                   uuid            not null default gen_random_uuid() primary key,
     source               text            not null references data_source (id),
     location_schedule_id uuid            not null references location_schedule (id),
     days                 text            not null,

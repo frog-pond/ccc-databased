@@ -1,6 +1,6 @@
 create table dictionary
 (
-    id          uuid not null default uuid_generate_v4() primary key,
+    id          uuid not null default gen_random_uuid() primary key,
     source      text not null references data_source (id) on update cascade on delete cascade,
     uri         text not null default '',
     title       text not null check (length(title) < 1024),

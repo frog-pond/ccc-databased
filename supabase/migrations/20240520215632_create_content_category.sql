@@ -1,6 +1,6 @@
 create table content_category
 (
-    id         uuid not null default uuid_generate_v4() primary key,
+    id         uuid not null default gen_random_uuid() primary key,
     title      text not null unique check (length(title) between 0 and 256),
     sort_title text null unique check (length(sort_title) between 0 and 256)
 );
