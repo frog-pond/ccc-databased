@@ -10,10 +10,11 @@ create table cafe
 alter table cafe
     enable row level security;
 
-create policy "cafe is viewable by everyone"
+create policy "Enable read access for all users"
     on cafe for select
-    to authenticated, anon
-    using (true);
+    to public using (true);
+
+---
 
 create table cafe_cor
 (
@@ -26,10 +27,11 @@ create table cafe_cor
 alter table cafe_cor
     enable row level security;
 
-create policy "cafe_cor is viewable by everyone"
+create policy "Enable read access for all users"
     on cafe_cor for select
-    to authenticated, anon
-    using (true);
+    to public using (true);
+
+---
 
 create table cafe_item
 (
@@ -45,10 +47,11 @@ create table cafe_item
 alter table cafe_item
     enable row level security;
 
-create policy "cafe_item is viewable by everyone"
+create policy "Enable read access for all users"
     on cafe_item for select
-    to authenticated, anon
-    using (true);
+    to public using (true);
+
+---
 
 create table cafe_item_variation
 (
@@ -60,10 +63,11 @@ create table cafe_item_variation
 alter table cafe_item_variation
     enable row level security;
 
-create policy "cafe_item_variation is viewable by everyone"
+create policy "Enable read access for all users"
     on cafe_item_variation for select
-    to authenticated, anon
-    using (true);
+    to public using (true);
+
+---
 
 create table cafe_item_cor
 (
@@ -75,10 +79,11 @@ create table cafe_item_cor
 alter table cafe_item_cor
     enable row level security;
 
-create policy "cafe_item_cor is viewable by everyone"
+create policy "Enable read access for all users"
     on cafe_item_cor for select
-    to authenticated, anon
-    using (true);
+    to public using (true);
+
+---
 
 create table cafe_station_menu
 (
@@ -95,10 +100,11 @@ create table cafe_station_menu
 alter table cafe_station_menu
     enable row level security;
 
-create policy "cafe_station_menu is viewable by everyone"
+create policy "Enable read access for all users"
     on cafe_station_menu for select
-    to authenticated, anon
-    using (true);
+    to public using (true);
+
+---
 
 create table cafe_menu_schedule
 (
@@ -110,7 +116,6 @@ create table cafe_menu_schedule
 alter table cafe_menu_schedule
     enable row level security;
 
-create policy "cafe_menu_schedule is viewable by everyone"
+create policy "Enable read access for all users"
     on cafe_menu_schedule for select
-    to authenticated, anon
-    using (true);
+    to public using (true);

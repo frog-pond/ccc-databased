@@ -18,10 +18,11 @@ create table calendar_event
 alter table calendar_event
     enable row level security;
 
-create policy "calendar_event is viewable by everyone"
+create policy "Enable read access for all users"
     on calendar_event for select
-    to authenticated, anon
-    using (true);
+    to public using (true);
+
+---
 
 create table calendar_event_category
 (
@@ -34,10 +35,11 @@ create table calendar_event_category
 alter table calendar_event_category
     enable row level security;
 
-create policy "calendar_event_category is viewable by everyone"
+create policy "Enable read access for all users"
     on calendar_event_category for select
-    to authenticated, anon
-    using (true);
+    to public using (true);
+
+---
 
 create table calendar_event_link
 (
@@ -53,7 +55,6 @@ create table calendar_event_link
 alter table calendar_event_link
     enable row level security;
 
-create policy "calendar_event_link is viewable by everyone"
+create policy "Enable read access for all users"
     on calendar_event_link for select
-    to authenticated, anon
-    using (true);
+    to public using (true);

@@ -19,10 +19,11 @@ create table location_schedule
 alter table location_schedule
     enable row level security;
 
-create policy "location_schedule is viewable by everyone"
+create policy "Enable read access for all users"
     on location_schedule for select
-    to authenticated, anon
-    using (true);
+    to public using (true);
+
+---
 
 create table location_schedule_timetable
 (
@@ -37,7 +38,6 @@ create table location_schedule_timetable
 alter table location_schedule_timetable
     enable row level security;
 
-create policy "location_schedule_timetable is viewable by everyone"
+create policy "Enable read access for all users"
     on location_schedule_timetable for select
-    to authenticated, anon
-    using (true);
+    to public using (true);

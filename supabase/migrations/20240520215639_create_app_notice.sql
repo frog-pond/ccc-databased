@@ -16,7 +16,6 @@ create table app_notice
 alter table app_notice
     enable row level security;
 
-create policy "app_notice is viewable by everyone"
+create policy "Enable read access for all users"
     on app_notice for select
-    to authenticated, anon
-    using (true);
+    to public using (true);

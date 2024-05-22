@@ -9,10 +9,11 @@ create table bus_route
 alter table bus_route
     enable row level security;
 
-create policy "bus_route is viewable by everyone"
+create policy "Enable read access for all users"
     on bus_route for select
-    to authenticated, anon
-    using (true);
+    to public using (true);
+
+---
 
 create table bus_route_stop
 (
@@ -25,10 +26,11 @@ create table bus_route_stop
 alter table bus_route_stop
     enable row level security;
 
-create policy "bus_route_stop is viewable by everyone"
+create policy "Enable read access for all users"
     on bus_route_stop for select
-    to authenticated, anon
-    using (true);
+    to public using (true);
+
+---
 
 create table bus_route_timetable
 (
@@ -45,10 +47,11 @@ create table bus_route_timetable
 alter table bus_route_timetable
     enable row level security;
 
-create policy "bus_route_timetable is viewable by everyone"
+create policy "Enable read access for all users"
     on bus_route_timetable for select
-    to authenticated, anon
-    using (true);
+    to public using (true);
+
+---
 
 create table bus_route_schedule
 (
@@ -62,7 +65,6 @@ create table bus_route_schedule
 alter table bus_route_schedule
     enable row level security;
 
-create policy "bus_route_schedule is viewable by everyone"
+create policy "Enable read access for all users"
     on bus_route_schedule for select
-    to authenticated, anon
-    using (true);
+    to public using (true);

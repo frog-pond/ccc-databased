@@ -20,12 +20,12 @@ create table directory_entry
 alter table directory_entry
     enable row level security;
 
-create policy "directory_entry is viewable by everyone"
+create policy "Enable read access for all users"
     on directory_entry for select
-    to authenticated, anon
-    using (true);
+    to public using (true);
 
--- TODO: what is this for, again?
+---
+
 create table directory_entry_category
 (
     directory_entry uuid references directory_entry (id) on update cascade on delete cascade,
@@ -35,10 +35,11 @@ create table directory_entry_category
 alter table directory_entry_category
     enable row level security;
 
-create policy "directory_entry_category is viewable by everyone"
+create policy "Enable read access for all users"
     on directory_entry_category for select
-    to authenticated, anon
-    using (true);
+    to public using (true);
+
+---
 
 create table directory_entry_location
 (
@@ -56,10 +57,11 @@ create table directory_entry_location
 alter table directory_entry_location
     enable row level security;
 
-create policy "directory_entry_location is viewable by everyone"
+create policy "Enable read access for all users"
     on directory_entry_location for select
-    to authenticated, anon
-    using (true);
+    to public using (true);
+
+---
 
 create table directory_entry_organization
 (
@@ -78,7 +80,6 @@ create table directory_entry_organization
 alter table directory_entry_organization
     enable row level security;
 
-create policy "directory_entry_organization is viewable by everyone"
+create policy "Enable read access for all users"
     on directory_entry_organization for select
-    to authenticated, anon
-    using (true);
+    to public using (true);

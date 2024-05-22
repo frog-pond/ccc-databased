@@ -8,7 +8,6 @@ create table content_category
 alter table content_category
     enable row level security;
 
-create policy "content_category is viewable by everyone"
+create policy "Enable read access for all users"
     on content_category for select
-    to authenticated, anon
-    using (true);
+    to public using (true);

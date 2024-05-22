@@ -22,7 +22,6 @@ create table student_work
 alter table student_work
     enable row level security;
 
-create policy "student_work is viewable by everyone"
+create policy "Enable read access for all users"
     on student_work for select
-    to authenticated, anon
-    using (true);
+    to public using (true);

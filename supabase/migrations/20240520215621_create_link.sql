@@ -18,7 +18,6 @@ create table link
 alter table link
     enable row level security;
 
-create policy "link is viewable by everyone"
+create policy "Enable read access for all users"
     on link for select
-    to authenticated, anon
-    using (true);
+    to public using (true);

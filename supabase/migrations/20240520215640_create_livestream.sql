@@ -17,7 +17,6 @@ create table livestream
 alter table livestream
     enable row level security;
 
-create policy "livestream is viewable by everyone"
+create policy "Enable read access for all users"
     on livestream for select
-    to authenticated, anon
-    using (true);
+    to public using (true);

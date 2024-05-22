@@ -9,10 +9,11 @@ create table feed
 alter table feed
     enable row level security;
 
-create policy "feed is viewable by everyone"
+create policy "Enable read access for all users"
     on feed for select
-    to authenticated, anon
-    using (true);
+    to public using (true);
+
+---
 
 create table feed_article
 (
@@ -33,10 +34,11 @@ create table feed_article
 alter table feed_article
     enable row level security;
 
-create policy "feed_article is viewable by everyone"
+create policy "Enable read access for all users"
     on feed_article for select
-    to authenticated, anon
-    using (true);
+    to public using (true);
+
+---
 
 create table feed_article_category
 (
@@ -48,7 +50,6 @@ create table feed_article_category
 alter table feed_article_category
     enable row level security;
 
-create policy "feed_article_category is viewable by everyone"
+create policy "Enable read access for all users"
     on feed_article_category for select
-    to authenticated, anon
-    using (true);
+    to public using (true);

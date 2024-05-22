@@ -16,7 +16,6 @@ create table dictionary
 alter table dictionary
     enable row level security;
 
-create policy "dictionary is viewable by everyone"
+create policy "Enable read access for all users"
     on dictionary for select
-    to authenticated, anon
-    using (true);
+    to public using (true);

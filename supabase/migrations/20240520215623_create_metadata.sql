@@ -9,7 +9,6 @@ create table metadata
 alter table metadata
     enable row level security;
 
-create policy "metadata is viewable by everyone"
+create policy "Enable read access for all users"
     on metadata for select
-    to authenticated, anon
-    using (true);
+    to public using (true);
