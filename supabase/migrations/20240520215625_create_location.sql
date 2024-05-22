@@ -1,20 +1,20 @@
 create table location
 (
-    id            uuid  not null default gen_random_uuid() primary key,
-    source        text  not null default 'manual',
-    within        uuid references location (id) on update cascade on delete restrict,
-    title         text  not null default '',
-    subtitle      text  not null default '',
-    abbreviation  text  not null default '',
-    room_number   text  not null default '',
-    outline_shape jsonb not null default '[]'::jsonb,                                                    -- geojson
-    coordinates   jsonb not null default '[]'::jsonb,
+    id            uuid                          not null default gen_random_uuid() primary key,
+    source        text                          not null default 'manual',
+    within        uuid                          null references location (id) on update cascade on delete restrict,
+    title         text                          not null default '',
+    subtitle      text                          not null default '',
+    abbreviation  text                          not null default '',
+    room_number   text                          not null default '',
+    outline_shape geography(GEOMETRYCOLLECTION) null,
+    coordinates   geography(POINT)              null,
     -- todo: keep these?
-    banner_uri    text  not null default '',
-    icon_uri      text  not null default '',
-    website_uri   text  not null default '',
-    phone         text  not null default '',
-    email         text  not null default ''
+    banner_uri    text                          not null default '',
+    icon_uri      text                          not null default '',
+    website_uri   text                          not null default '',
+    phone         text                          not null default '',
+    email         text                          not null default ''
 );
 
 alter table location
