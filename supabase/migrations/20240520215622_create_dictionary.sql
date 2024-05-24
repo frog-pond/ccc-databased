@@ -13,6 +13,8 @@ create table dictionary
     sort_group  text not null generated always as ( left(upper(sort_title), 1) ) stored
 );
 
+create index on dictionary(source);
+
 alter table dictionary
     enable row level security;
 

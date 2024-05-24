@@ -16,6 +16,11 @@ create table location_schedule
                                                when location is null then location_category is not null end)
 );
 
+create index on location_schedule (source);
+create index on location_schedule (location);
+create index on location_schedule (location_category);
+create index on location_schedule (parent_schedule);
+
 alter table location_schedule
     enable row level security;
 
@@ -27,13 +32,16 @@ create policy "Enable read access for all users"
 
 create table location_schedule_timetable
 (
-    id                   uuid            not null default gen_random_uuid() primary key,
-    source               text            not null references data_source (id),
-    location_schedule_id uuid            not null references location_schedule (id),
-    days                 text            not null,
-    open_at              time            not null,
-    open_for             interval minute not null
+    id                uuid            not null default gen_random_uuid() primary key,
+    source            text            not null references data_source (id),
+    location_schedule uuid            not null references location_schedule (id),
+    days              text            not null,
+    open_at           time            not null,
+    open_for          interval minute not null
 );
+
+create index on location_schedule_timetable (source);
+create index on location_schedule_timetable (location_schedule);
 
 alter table location_schedule_timetable
     enable row level security;

@@ -6,6 +6,8 @@ create table feed
     primary key (uri)
 );
 
+create index on feed (source);
+
 alter table feed
     enable row level security;
 
@@ -31,6 +33,10 @@ create table feed_article
     constraint only_one_location check ( case when campus_location_id is not null then textual_location is null end )
 );
 
+create index on feed_article (source);
+create index on feed_article (campus_location_id);
+create index on feed_article (sponsoring_entity);
+
 alter table feed_article
     enable row level security;
 
@@ -53,3 +59,5 @@ alter table feed_article_category
 create policy "Enable read access for all users"
     on feed_article_category for select
     to public using (true);
+
+create index on feed_article_category (category_id);

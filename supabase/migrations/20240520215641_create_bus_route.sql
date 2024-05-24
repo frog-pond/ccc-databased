@@ -6,6 +6,8 @@ create table bus_route
     title  text not null
 );
 
+create index on bus_route (source);
+
 alter table bus_route
     enable row level security;
 
@@ -20,8 +22,10 @@ create table bus_route_stop
     id          uuid  not null default gen_random_uuid() primary key,
     source      text  not null references data_source (id) on update cascade on delete cascade,
     name        text  not null,
-    coordinates jsonb not null default '[]'::jsonb
+    coordinates point not null default 'POINT(0 0)'::point
 );
+
+create index on bus_route_stop (source);
 
 alter table bus_route_stop
     enable row level security;
@@ -44,6 +48,10 @@ create table bus_route_timetable
     constraint outbound_time_if_stop check (case when outbound_stop is not null then outbound_time is not null end)
 );
 
+create index on bus_route_timetable (source);
+create index on bus_route_timetable (inbound_stop);
+create index on bus_route_timetable (outbound_stop);
+
 alter table bus_route_timetable
     enable row level security;
 
@@ -61,6 +69,9 @@ create table bus_route_schedule
     active_from  timestamptz null,
     active_until timestamptz null
 );
+
+create index on bus_route_schedule (timetable_id);
+create index on bus_route_schedule (source);
 
 alter table bus_route_schedule
     enable row level security;

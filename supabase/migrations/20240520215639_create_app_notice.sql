@@ -13,6 +13,9 @@ create table app_notice
     platform     text        null
 );
 
+create index on app_notice (source);
+create index on app_notice (active_until) where (active_until is not null);
+
 alter table app_notice
     enable row level security;
 

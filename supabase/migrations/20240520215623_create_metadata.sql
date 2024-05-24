@@ -6,6 +6,8 @@ create table metadata
     primary key (key, value)
 );
 
+create index on metadata(source);
+
 alter table metadata
     enable row level security;
 

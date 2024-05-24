@@ -17,6 +17,8 @@ create table directory_entry
     specialties  text
 );
 
+create index on directory_entry (source);
+
 alter table directory_entry
     enable row level security;
 
@@ -31,6 +33,8 @@ create table directory_entry_category
     directory_entry uuid references directory_entry (id) on update cascade on delete cascade,
     category        text not null check (length(trim(category)) > 0)
 );
+
+create index on directory_entry_category (directory_entry);
 
 alter table directory_entry_category
     enable row level security;
@@ -54,6 +58,10 @@ create table directory_entry_location
     description     text
 );
 
+create index on directory_entry_location (directory_entry);
+create index on directory_entry_location (location);
+create index on directory_entry_location (source);
+
 alter table directory_entry_location
     enable row level security;
 
@@ -76,6 +84,10 @@ create table directory_entry_organization
     hours                  text, -- can we use a schedule record for this? probably not...
     description            text
 );
+
+create index on directory_entry_organization (directory_entry);
+create index on directory_entry_organization (directory_organization);
+create index on directory_entry_organization (source);
 
 alter table directory_entry_organization
     enable row level security;

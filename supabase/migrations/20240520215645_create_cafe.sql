@@ -7,6 +7,9 @@ create table cafe
     location    uuid null references location (id)
 );
 
+create index on cafe (source);
+create index on cafe (location);
+
 alter table cafe
     enable row level security;
 
@@ -44,6 +47,8 @@ create table cafe_item
     nutrition   jsonb not null default '{}'::jsonb  -- TODO: expand this into a table
 );
 
+create index on cafe_item (source);
+
 alter table cafe_item
     enable row level security;
 
@@ -60,6 +65,8 @@ create table cafe_item_variation
     description  text
 );
 
+create index on cafe_item_variation (cafe_item_id);
+
 alter table cafe_item_variation
     enable row level security;
 
@@ -75,6 +82,8 @@ create table cafe_item_cor
     cafe_cor_id  text not null references cafe_cor (id),
     primary key (cafe_item_id, cafe_cor_id)
 );
+
+create index on cafe_item_cor (cafe_cor_id);
 
 alter table cafe_item_cor
     enable row level security;
@@ -97,6 +106,9 @@ create table cafe_station_menu
     is_featured        bool    not null default false
 );
 
+create index on cafe_station_menu (source);
+create index on cafe_station_menu (item_id);
+
 alter table cafe_station_menu
     enable row level security;
 
@@ -112,6 +124,8 @@ create table cafe_menu_schedule
     station_id  uuid not null references cafe_station_menu (id),
     primary key (schedule_id, station_id)
 );
+
+create index on cafe_menu_schedule (station_id);
 
 alter table cafe_menu_schedule
     enable row level security;

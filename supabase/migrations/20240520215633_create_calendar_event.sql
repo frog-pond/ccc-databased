@@ -15,6 +15,11 @@ create table calendar_event
     constraint only_one_location check ( case when campus_location_id is not null then textual_location is null end )
 );
 
+create index on calendar_event (source);
+create index on calendar_event (recurrence_of_event_id);
+create index on calendar_event (sponsoring_entity);
+create index on calendar_event (campus_location_id);
+
 alter table calendar_event
     enable row level security;
 
@@ -31,6 +36,9 @@ create table calendar_event_category
     source            text not null references data_source (id) on update cascade on delete cascade,
     primary key (calendar_event_id, category_id)
 );
+
+create index on calendar_event_category (category_id);
+create index on calendar_event_category (source);
 
 alter table calendar_event_category
     enable row level security;
@@ -51,6 +59,8 @@ create table calendar_event_link
     link_mode         text not null check (link_mode in ('a', 'stream')),
     primary key (calendar_event_id, href)
 );
+
+create index on calendar_event_link (source);
 
 alter table calendar_event_link
     enable row level security;

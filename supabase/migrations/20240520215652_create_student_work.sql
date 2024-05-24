@@ -19,6 +19,9 @@ create table student_work
                                                 when department_name is null then department_id is not null end)
 );
 
+create index on student_work (source);
+create index on student_work (department_id);
+
 alter table student_work
     enable row level security;
 

@@ -15,6 +15,8 @@ create table link
     primary key (type, title)
 );
 
+create index on link(source);
+
 alter table link
     enable row level security;
 

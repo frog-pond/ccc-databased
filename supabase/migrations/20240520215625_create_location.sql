@@ -17,6 +17,9 @@ create table location
     email         text                          not null default ''
 );
 
+create index on location (source);
+create index on location (within);
+
 alter table location
     enable row level security;
 
@@ -30,9 +33,11 @@ create table location_category
 (
     id         uuid not null default gen_random_uuid() primary key,
     title      text not null unique check (length(title) between 0 and 256),
-    sort_title text unique check (length(sort_title) between 0 and 256),
+    sort_title text null check (length(sort_title) between 0 and 256),
     source     text not null references data_source (id) on update cascade on delete cascade
 );
+
+create index on location_category (source);
 
 alter table location_category
     enable row level security;
@@ -46,7 +51,8 @@ create policy "Enable read access for all users"
 create table location_category_mapping
 (
     location_id          uuid not null references location (id),
-    location_category_id uuid not null references location_category (id)
+    location_category_id uuid not null references location_category (id),
+    primary key (location_id, location_category_id)
 );
 
 alter table location_category_mapping
