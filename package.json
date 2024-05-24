@@ -1,0 +1,16 @@
+{
+  "name": "ccc-databased",
+  "private": true,
+  "version": "1.0.0",
+  "description": "approximate caution, approximate context",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "AGPL-3",
+  "devDependencies": {
+    "supabase": "^1.167.4"
+  }
+}
